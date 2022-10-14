@@ -42,7 +42,7 @@ using namespace matrix;
 
 void DobControl::setGains(const Vector3f &tau)
 {
-	_gain_tau = tau;
+	// _gain_tau = tau;
 }
 
 void DobControl::setSaturationStatus(const Vector<bool, 3> &saturation_positive,
@@ -57,6 +57,7 @@ Vector3f DobControl::update(const Vector3f &rate_sp,
 {
 	// angular rates error
 	Vector3f diff_rate_sp = (rate_sp - _prev_rate_sp) / dt;
+	_prev_rate_sp = rate_sp;
 
 	matrix::Vector3f integ_input = actuator_sp - diff_rate_sp;
 

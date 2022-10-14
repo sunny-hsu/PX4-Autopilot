@@ -91,10 +91,10 @@ private:
 	void updateIntegral(matrix::Vector3f &rate_error, const float dt);
 
 	// Gains
-	matrix::Vector3f _gain_tau; ///
-	matrix::Vector3f _prev_rate_sp;
+	matrix::Vector3f _gain_tau{matrix::Vector3f(0.000000000001, 0.0000000000001, 0.0000000000001)}; ///
+	matrix::Vector3f _prev_rate_sp{matrix::Vector3f(0.0, 0.0, 0.0)};
 	matrix::Vector3f _lim_int;
-	matrix::Vector3f _input_rate;
+	matrix::Vector3f _input_rate{matrix::Vector3f(0.0, 0.0, 0.0)};
 
 	// Feedback from control allocation
 	matrix::Vector<bool, 3> _control_allocator_saturation_negative;

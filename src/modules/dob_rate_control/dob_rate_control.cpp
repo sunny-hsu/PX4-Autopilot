@@ -413,11 +413,15 @@ void DobRateControl::Run()
 				/* Run attitude RATE controllers which need the desired attitudes from above, add trim */
 				Vector3f angular_acceleration_setpoint = _rate_control.update(rates, body_rates_setpoint, angular_accel, dt,
 						_landed);
-				bool enable_dob = false;
+				bool enable_dob = true;
 
-				if (enable_dob) {
+				// PX4_INFO("===================");
+				// PX4_INFO("  - PID output: %f, %f, %f", double(angular_acceleration_setpoint(0)), double(angular_acceleration_setpoint(1)), double(angular_acceleration_setpoint(2)));
+				if (enable_dob && !_landed) {
 					angular_acceleration_setpoint = _dob_control.update(body_rates_setpoint, angular_acceleration_setpoint, dt, _landed);
 				}
+
+				// PX4_INFO("  - DOB output: %f, %f, %f", double(angular_acceleration_setpoint(0)), double(angular_acceleration_setpoint(1)), double(angular_acceleration_setpoint(2)));
 
 				float roll_feedforward = _param_fw_rr_ff.get() * _airspeed_scaling * body_rates_setpoint(0);
 				float roll_u = angular_acceleration_setpoint(0) * _airspeed_scaling * _airspeed_scaling + roll_feedforward;
