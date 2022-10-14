@@ -42,7 +42,7 @@ using namespace matrix;
 
 void DobControl::setGains(const Vector3f &tau)
 {
-	// _gain_tau = tau;
+	_gain_tau = tau;
 }
 
 void DobControl::setSaturationStatus(const Vector<bool, 3> &saturation_positive,
