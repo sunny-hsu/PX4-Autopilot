@@ -80,9 +80,8 @@ DobRateControl::parameters_update()
 
 	_rate_control.setGains(rate_p, rate_i, rate_d);
 
-	const Vector3f dob_rate_tau = Vector3f(0.0, 0.0, 0.0);
-
-	_dob_control.setGains(dob_rate_tau);
+	// const Vector3f dob_rate_tau = Vector3f(0.0, 0.0, 0.0);
+	// _dob_control.setGains(dob_rate_tau);
 
 	_rate_control.setIntegratorLimit(
 		Vector3f(_param_fw_rr_imax.get(), _param_fw_pr_imax.get(), _param_fw_yr_imax.get()));
